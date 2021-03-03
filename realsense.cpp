@@ -34,20 +34,17 @@ int main(int argc, char * argv[]) try
     //If there is no color stream, choose to align depth to another stream
     rs2::device dev = profile.get_device();
     rs2::depth_sensor ds = dev.query_sensors().front().as<rs2::depth_sensor>();
-    using namespace cv;
     while (true)
     {
         rs2::frameset data = pipe.wait_for_frames(); // Wait for next set of frames from the camera
-	data = align_to_color.process(data);
-	rs2::video_frame rgb = data.get_color_frame();
+	    data = align_to_color.process(data);
+	    rs2::video_frame rgb = data.get_color_frame();
         uint8_t* rgb_data = (uint8_t*)rgb.get_data();
         rs2::depth_frame depth = data.get_depth_frame();
         uint16_t* depth_data = (uint16_t*)depth.get_data();
-
+    }
     return EXIT_SUCCESS;
 }
-
-
 catch (const rs2::error & e)
 {
     std::cerr << "RealSense error calling " << e.get_failed_function() << "(" << e.get_failed_args() << "):\n    " << e.what() << std::endl;
