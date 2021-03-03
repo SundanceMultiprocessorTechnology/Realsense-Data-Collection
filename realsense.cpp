@@ -44,7 +44,7 @@ int main(int argc, char * argv[]) try
         uint16_t* depth_data = (uint16_t*)depth.get_data();
         clock_t endFrame = clock();
         double fps = 1/(endFrame-beginFrame);
-        std::cout<<"FrameTime was:"<<fps<<std::endl
+        std::cout<<"FrameTime was:"<<fps<<std::endl;
     }
     pipe.stop();
     std::cout << "Pipeline Stopped..." << std::endl;
