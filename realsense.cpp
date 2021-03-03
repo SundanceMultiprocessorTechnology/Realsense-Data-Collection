@@ -71,7 +71,7 @@ int main(int argc, char * argv[]) try
             cfg.enable_record_to_file("./bags/" + std::to_string(t) + ":" + std::to_string(timeintervals) +".bag");
             std::cout << "Pipeline Starting..." << std::endl;
             std::this_thread::sleep_for(chrono::seconds(5));
-            rs2::pipeline_profile profile = pipe.start(cfg);
+            pipe.start(cfg);
             clockstarted = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
             timeintervals = timeintervals + 1;
         }
