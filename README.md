@@ -1,5 +1,5 @@
 # Realsense-Data-Collection
-
+Use in line with ultra96v2 and d435i Realsense Camera to collect Datasets
 ## To Use
 `$ git clone https://github.com/SundanceMultiprocessorTechnology/Realsense-Data-Collection.git`
 
