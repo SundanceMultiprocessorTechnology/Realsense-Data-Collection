@@ -29,9 +29,9 @@ int main(int argc, char * argv[]) try
     // Declare RealSense pipeline, encapsulating the actual device and sensors
     rs2::pipeline pipe;
     rs2::config cfg;
-    cfg.enable_stream(RS2_STREAM_INFRARED,  1, 424, 240,RS2_FORMAT_Y8);
-    cfg.enable_stream(RS2_STREAM_DEPTH, 424, 240,RS2_FORMAT_Z16);
-    cfg.enable_stream(RS2_STREAM_COLOR, 320, 240,RS2_FORMAT_Y16);
+    cfg.enable_stream(RS2_STREAM_INFRARED,  1, 424, 240,RS2_FORMAT_Y8,6);
+    cfg.enable_stream(RS2_STREAM_DEPTH, 424, 240,RS2_FORMAT_Z16,6);
+    cfg.enable_stream(RS2_STREAM_COLOR, 320, 240,RS2_FORMAT_Y16,6);
     cfg.enable_record_to_file("./bags/" + std::to_string(t) + ".bag");
     // Start streaming with default recommended configuration
     rs2::pipeline_profile profile = pipe.start(cfg);
@@ -67,7 +67,7 @@ int main(int argc, char * argv[]) try
         std::cout<<"Bag running for:"<<clocknow<< " seconds" <<std::endl;
         }
 
-        if (clocknow >= (10)){
+        if (clocknow >= (30)){
             pipe.stop();
             std::cout << "Pipeline Stopped..." << std::endl;
             cfg.enable_record_to_file("./bags/" + std::to_string(t) + ":" + std::to_string(timeintervals) +".bag");
