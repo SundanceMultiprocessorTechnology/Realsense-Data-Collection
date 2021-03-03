@@ -65,7 +65,7 @@ int main(int argc, char * argv[]) try
         std::cout<<"Bag running for:"<<clocknow<< " seconds" <<std::endl;
         }
 
-        if (clocknow >= (20)){
+        if (clocknow >= (10)){
             pipe.stop();
             std::cout << "Pipeline Stopped..." << std::endl;
             cfg.enable_record_to_file("./bags/" + std::to_string(t) + ":" + std::to_string(timeintervals) +".bag");
