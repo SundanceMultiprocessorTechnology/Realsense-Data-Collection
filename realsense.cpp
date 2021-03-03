@@ -35,12 +35,16 @@ int main(int argc, char * argv[]) try
     rs2::depth_sensor ds = dev.query_sensors().front().as<rs2::depth_sensor>();
     while (true)
     {
+        clock_t beginFrame = clock();
         rs2::frameset data = pipe.wait_for_frames(); // Wait for next set of frames from the camera
 	    data = align_to_color.process(data);
 	    rs2::video_frame rgb = data.get_color_frame();
         uint8_t* rgb_data = (uint8_t*)rgb.get_data();
         rs2::depth_frame depth = data.get_depth_frame();
         uint16_t* depth_data = (uint16_t*)depth.get_data();
+        clock_t endFrame = clock();
+        double fps = endFrame-beginFrame;
+        std::cout<<"FrameTime was:"<<fps<<std::endl
     }
     pipe.stop();
     std::cout << "Pipeline Stopped..." << std::endl;
