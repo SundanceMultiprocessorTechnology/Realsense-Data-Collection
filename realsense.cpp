@@ -9,6 +9,8 @@
 #include <chrono>
 
 using namespace std;
+rs2::pipeline pipe;
+rs2::config cfg;
 int main(int argc, char * argv[]) try
 {
     std::cout << "Realsense Vitis AI Demo" << std::endl;
@@ -19,8 +21,7 @@ int main(int argc, char * argv[]) try
     rs2::colorizer color_map;
 
     // Declare RealSense pipeline, encapsulating the actual device and sensors
-    rs2::pipeline pipe;
-    rs2::config cfg;
+
     cfg.enable_stream(RS2_STREAM_DEPTH,640,480,RS2_FORMAT_Z16);
     cfg.enable_stream(RS2_STREAM_COLOR,1280,720,RS2_FORMAT_BGR8);
     cfg.enable_record_to_file("./test.bag");
@@ -43,6 +44,7 @@ int main(int argc, char * argv[]) try
         uint16_t* depth_data = (uint16_t*)depth.get_data();
     }
     pipe.stop();
+    std::cout << "Pipeline Stopped..." << std::endl;
     return EXIT_SUCCESS;
 }
 catch (const rs2::error & e)
