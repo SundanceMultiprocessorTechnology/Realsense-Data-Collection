@@ -23,7 +23,7 @@ int main(int argc, char * argv[]) try
     rs2::config cfg;
     cfg.enable_stream(RS2_STREAM_DEPTH,640,480,RS2_FORMAT_Z16);
     cfg.enable_stream(RS2_STREAM_COLOR,1280,720,RS2_FORMAT_BGR8);
-    cfg.enable_record_to_file("./" << std::to_string(t) << ".bag");
+    cfg.enable_record_to_file("./test.bag");
     // Start streaming with default recommended configuration
     rs2::pipeline_profile profile = pipe.start(cfg);
     // Each depth camera might have different units for depth pixels, so we get it here
@@ -42,6 +42,7 @@ int main(int argc, char * argv[]) try
         rs2::depth_frame depth = data.get_depth_frame();
         uint16_t* depth_data = (uint16_t*)depth.get_data();
     }
+    pipe.stop()
     return EXIT_SUCCESS;
 }
 catch (const rs2::error & e)
