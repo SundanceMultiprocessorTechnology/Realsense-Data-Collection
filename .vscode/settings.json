@@ -48,6 +48,7 @@
         "numeric": "cpp",
         "random": "cpp",
         "cinttypes": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "map": "cpp"
     }
 }

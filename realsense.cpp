@@ -7,6 +7,7 @@
 #include <memory>
 #include <chrono>
 #include <thread>
+#include <sys/stat.h>
 using namespace std;
 int main(int argc, char * argv[]) try
 {
@@ -14,6 +15,13 @@ int main(int argc, char * argv[]) try
     std::cout << "Realsense Vitis AI Demo" << std::endl;
     std::cout << "By Jack Bonnell" << std::endl; 
     std::cout << "Email: Jack.B@sundance.com" << std::endl;
+    string folderpath = "./bags";
+    int status = mkdir("./bags", 0777);
+    if (!status){
+        std::cout << "created ./bag directory..." << std::endl;
+    }else{
+        std::cout << "./bag directory already exists..." << std::endl;
+    }
     std::time_t t = std::time(0);
     // Declare depth colorizer for pretty visualization of depth data
     rs2::colorizer color_map;
@@ -23,7 +31,7 @@ int main(int argc, char * argv[]) try
     rs2::config cfg;
     cfg.enable_stream(RS2_STREAM_DEPTH,640,480,RS2_FORMAT_Z16);
     cfg.enable_stream(RS2_STREAM_COLOR,1280,720,RS2_FORMAT_BGR8);
-    cfg.enable_record_to_file("./" + std::to_string(t) + ".bag");
+    cfg.enable_record_to_file("./bags/" + std::to_string(t) + ".bag");
     // Start streaming with default recommended configuration
     rs2::pipeline_profile profile = pipe.start(cfg);
     // Each depth camera might have different units for depth pixels, so we get it here
@@ -35,6 +43,7 @@ int main(int argc, char * argv[]) try
     rs2::depth_sensor ds = dev.query_sensors().front().as<rs2::depth_sensor>();
     clock_t clockstarted = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     int timeintervals = 1;
+    
     while (true)
     {
         
@@ -56,10 +65,10 @@ int main(int argc, char * argv[]) try
         std::cout<<"Bag running for:"<<clocknow<< " seconds" <<std::endl;
         }
 
-        if (clocknow >= (30)){
+        if (clocknow >= (20)){
             pipe.stop();
             std::cout << "Pipeline Stopped..." << std::endl;
-            cfg.enable_record_to_file("./" + std::to_string(t) + ":" + std::to_string(timeintervals) +".bag");
+            cfg.enable_record_to_file("./bags/" + std::to_string(t) + ":" + std::to_string(timeintervals) +".bag");
             std::cout << "Pipeline Starting..." << std::endl;
             std::this_thread::sleep_for(chrono::seconds(5));
             rs2::pipeline_profile profile = pipe.start(cfg);
