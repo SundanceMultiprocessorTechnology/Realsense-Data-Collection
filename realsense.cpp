@@ -3,9 +3,7 @@
 // Email: jack.b@sundance.com
 //Website: www.sundance.com
 #include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
-#include <iostream>
 #include <glog/logging.h>
-#include <iostream>
 #include <memory>
 #include <chrono>
 
