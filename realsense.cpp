@@ -30,7 +30,7 @@ int main(int argc, char * argv[]) try
     rs2::pipeline pipe;
     rs2::config cfg;
     cfg.enable_stream(RS2_STREAM_DEPTH,640,480,RS2_FORMAT_Z16);
-    cfg.enable_stream(RS2_STREAM_COLOR,1280,720,RS2_FORMAT_BGR8);
+    cfg.enable_stream(RS2_STREAM_COLOR,640,480,RS2_FORMAT_BGR8);
     cfg.enable_record_to_file("./bags/" + std::to_string(t) + ".bag");
     // Start streaming with default recommended configuration
     rs2::pipeline_profile profile = pipe.start(cfg);
