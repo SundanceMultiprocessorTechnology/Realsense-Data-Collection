@@ -42,7 +42,7 @@ int main(int argc, char * argv[]) try
         rs2::depth_frame depth = data.get_depth_frame();
         uint16_t* depth_data = (uint16_t*)depth.get_data();
     }
-    pipe.stop()
+    pipe.stop();
     return EXIT_SUCCESS;
 }
 catch (const rs2::error & e)
